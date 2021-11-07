@@ -31,6 +31,21 @@
 #include "ProtoHelper.h"
 #include "Logger.h"
 
+
+#include "audio_element.h"
+#include "audio_pipeline.h"
+#include "audio_event_iface.h"
+#include "audio_mem.h"
+#include "audio_common.h"
+#include "i2s_stream.h"
+#include "mp3_decoder.h"
+#include "esp_peripherals.h"
+#include "periph_touch.h"
+#include "periph_adc_button.h"
+#include "periph_button.h"
+#include "board.h"
+
+
 // Config sink
 #define ES8388 // INTERNAL, AC101, ES8018, ES8018, PCM5102
 #define QUALITY     320      // 320, 160, 96
@@ -195,6 +210,13 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     ESP_ERROR_CHECK(example_connect());
+
+    ESP_LOGI(TAG, "[ 1 ] Start audio codec chip");
+    audio_board_handle_t board_handle = audio_board_init();
+    audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_BOTH, AUDIO_HAL_CTRL_START);
+
+    int player_volume;
+    audio_hal_get_volume(board_handle->audio_hal, &player_volume);
 
     ESP_LOGI("TAG", "Connected to AP, start spotify receiver");
     // for(;;);

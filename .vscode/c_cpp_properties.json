@@ -16,7 +16,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "D:/users/cpetters/esp-adf/components/**"
             ],
             "defines": [],
             "macFrameworkPath": [

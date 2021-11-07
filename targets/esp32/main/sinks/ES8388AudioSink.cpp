@@ -22,8 +22,8 @@ ES8388AudioSink::ES8388AudioSink()
     i2s_pin_config_t pin_config = {
         .bck_io_num = 5,
         .ws_io_num = 25,
-        .data_out_num = 35,
-        .data_in_num = 26
+        .data_out_num = 26,
+        .data_in_num = 35
     };
     i2s_driver_install((i2s_port_t)0, &i2s_config, 0, NULL);
     i2s_set_pin((i2s_port_t)0, &pin_config);
