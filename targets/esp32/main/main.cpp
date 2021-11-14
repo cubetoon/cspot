@@ -32,7 +32,7 @@
 #include "Logger.h"
 
 // Config sink
-#define AC101 // INTERNAL, AC101, ES8018, PCM5102
+#define ES8388 // INTERNAL, AC101, ES8018, ES8388, PCM5102
 #define QUALITY     320      // 320, 160, 96
 #define DEVICE_NAME "CSpot"
 
@@ -44,6 +44,9 @@
 #endif
 #ifdef ES8018
 #include <ES9018AudioSink.h>
+#endif
+#ifdef ES8388
+#include <ES8388AudioSink.h>
 #endif
 #ifdef PCM5102
 #include <PCM5102AudioSink.h>
@@ -119,6 +122,9 @@ static void cspotTask(void *pvParameters)
 #ifdef ES8018
         auto audioSink = std::make_shared<ES9018AudioSink>();
 #endif
+#ifdef ES8388
+        auto audioSink = std::make_shared<ES8388AudioSink>();
+#endif
 #ifdef PCM5102
         auto audioSink = std::make_shared<PCM5102AudioSink>();
 #endif
@@ -189,6 +195,8 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     ESP_ERROR_CHECK(example_connect());
+
+
 
     ESP_LOGI("TAG", "Connected to AP, start spotify receiver");
     // for(;;);
