@@ -11,9 +11,6 @@
 #include "esp_err.h"
 #include "esp_log.h"
 
-#include "audio_element.h"
-#include "board.h"
-
 class ES8388AudioSink : public BufferedAudioSink
 {
 public:

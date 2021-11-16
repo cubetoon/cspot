@@ -123,7 +123,7 @@ static void cspotTask(void *pvParameters)
         auto audioSink = std::make_shared<ES9018AudioSink>();
 #endif
 #ifdef ES8388
-        auto audioSink = std::make_shared<ES8388AudioSink>();
+        auto audioSink = std::make_shared<ES8388AudioSink>();      
 #endif
 #ifdef PCM5102
         auto audioSink = std::make_shared<PCM5102AudioSink>();

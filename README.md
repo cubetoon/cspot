@@ -108,6 +108,11 @@ Additionaly the following audio sinks are implemented for the esp32 target:
   - LCK to GPIO32
   - GND to Ground
   - VIN to 3.3V (but supposedly 5V tolerant)
+- [`ES8388AudioSink`](targets/esp32/main/sinks/ES8388AudioSink.cpp) - provides playback via a ES8388 DAC connected to the ESP32 on [`Espressif LyraT V4.3 audio development board`](https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/board-esp32-lyrat-v4.3.html). The sink also pulls up GPIO21 to enable the NS4150 on-board amplifiers.
+Wiring for the DAC can be configured in the sink and defaults to:
+  - BCK to GPIO5
+  - DOUT to GPIO26
+  - LCK to GPIO25
 - TODO: internal esp32 DAC for crappy quality testing.
 
 You can also easily add support for your own DAC of choice by implementing your own audio sink. Each new audio sink must implement the `void feedPCMFrames(std::vector<uint8_t> &data)` method which should accept stereo PCM audio data at 44100 Hz and 16 bits per sample. Please note that the sink should somehow buffer the data, because playing it back may result in choppy audio.

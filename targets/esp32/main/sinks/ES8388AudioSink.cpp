@@ -32,9 +32,9 @@ ES8388AudioSink::ES8388AudioSink()
     REG_SET_FIELD(PIN_CTRL, CLK_OUT1, 0);
     ESP_LOGI("OI", "MCLK output on CLK_OUT1");
 
-    ESP_LOGI("OI", "Start audio codec chip");
-    audio_board_handle_t board_handle = audio_board_init();
-    audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_DECODE, AUDIO_HAL_CTRL_START);
+    REG_WRITE(GPIO_ENABLE_REG, BIT21);
+    REG_WRITE(GPIO_OUT_W1TS_REG, BIT21);
+    ESP_LOGI("OI", "GPIO 21 pulled high to enable PA on LyraT 4.3");
     
     startI2sFeed();
 }
